@@ -13,10 +13,18 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "diecast_vehicle")
+@SequenceGenerator(
+        name = "diecast_vehicle_seq",
+        sequenceName = "diecast_vehicle_seq",
+        allocationSize = 50,
+        initialValue = 1
+)
 public class DiecastVehicle implements Serializable {
+
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "diecast_vehicle_seq")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String name;
     private String scale;
     private String vehicleBrand;
