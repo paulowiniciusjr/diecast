@@ -1,7 +1,6 @@
-package com.pjrminis.diecast.Controller;
+package com.pjrminis.diecast.controller;
 
 import com.pjrminis.diecast.config.JwtUtil;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

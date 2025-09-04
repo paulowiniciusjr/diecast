@@ -1,4 +1,4 @@
-package com.pjrminis.diecast.Controller;
+package com.pjrminis.diecast.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

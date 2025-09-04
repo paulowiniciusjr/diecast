@@ -1,4 +1,4 @@
-package com.pjrminis.diecast.Controller;
+package com.pjrminis.diecast.controller;
 
 import com.pjrminis.diecast.model.DiecastVehicle;
 import com.pjrminis.diecast.service.DiecastVehicleService;
