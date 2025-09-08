@@ -47,6 +47,10 @@ dependencies {
 
     // Spring WebFlux for reactive programming
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    // Spring AMQP for RabbitMQ
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'com.rabbitmq:amqp-client:5.26.0'
 }
 
 tasks.named('test') {
