@@ -16,9 +16,10 @@ import java.io.Serializable;
 @SequenceGenerator(
         name = "diecast_vehicle_seq",
         sequenceName = "diecast_vehicle_seq",
-        allocationSize = 50,
+        allocationSize = 1,
         initialValue = 1
 )
+
 public class DiecastVehicle implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "diecast_vehicle_seq")
@@ -27,7 +28,11 @@ public class DiecastVehicle implements Serializable {
 
     private String name;
     private String scale;
+
+    @Column(name = "vehicle_brand")
     private String vehicleBrand;
+
+    @Column(name = "vehicle_diecast_brand")
     private String vehicleDiecastBrand;
     private String color;
 }
