@@ -1,6 +1,8 @@
 package com.pjrminis.diecast.controller;
 
 import com.pjrminis.diecast.config.JwtUtil;
+import com.pjrminis.diecast.dto.AuthDto;
+import com.pjrminis.diecast.dto.AuthDtoResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,9 +18,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username) {
+    public AuthDtoResponse login(@RequestBody AuthDto authDto) {
         // Aqui você pode validar o usuário (ex.: consultar no banco)@Autowired
-        return jwtUtil.generateToken(username);
+        AuthDtoResponse response = new AuthDtoResponse();
+        response.setToken(jwtUtil.generateToken(authDto.getUsername()));
+        return response;
     }
 /*
     @PostMapping("/login")

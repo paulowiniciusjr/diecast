@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.5.5'
 	id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 group = 'com.pjrminis'
@@ -51,6 +52,20 @@ dependencies {
     // Spring AMQP for RabbitMQ
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
     implementation 'com.rabbitmq:amqp-client:5.26.0'
+
+    // LangChain4j Core
+    //implementation 'dev.langchain4j:langchain4j:1.4.0'
+
+    // LangChain4j OpenAI
+    //implementation 'dev.langchain4j:langchain4j-open-ai:1.4.0'
+
+    //implementation 'org.springframework.ai:spring-ai-starter-model-openai:1.0.2'
+
+    //implementation 'org.springframework.ai:spring-ai-starter-model-azure-openai'
+
+    implementation 'org.springframework.ai:spring-ai-azure-openai-spring-boot-starter:1.0.0-M6'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
 }
 
 tasks.named('test') {

@@ -1,6 +1,7 @@
 package com.pjrminis.diecast.controller;
 
 import com.pjrminis.diecast.model.DiecastVehicle;
+import com.pjrminis.diecast.model.DiecastVehicleKt;
 import com.pjrminis.diecast.service.DiecastVehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,7 @@
 package com.pjrminis.diecast.repository;
 
 import com.pjrminis.diecast.model.DiecastVehicle;
+import com.pjrminis.diecast.model.DiecastVehicleKt;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
