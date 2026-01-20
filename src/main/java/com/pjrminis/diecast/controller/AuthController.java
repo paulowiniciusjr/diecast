@@ -22,6 +22,7 @@ public class AuthController {
         // Aqui você pode validar o usuário (ex.: consultar no banco)@Autowired
         AuthDtoResponse response = new AuthDtoResponse();
         response.setToken(jwtUtil.generateToken(authDto.getUsername()));
+        response.setExpiresIn(jwtUtil.getExpirationTimeInSeconds());
         return response;
     }
 /*

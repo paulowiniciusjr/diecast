@@ -14,13 +14,13 @@ import java.util.Date;
 public class JwtUtil {
 
     private final SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    private final long expirationTime = 86400000; // 1 dia em milissegundos
+    private static final long EXPIRATION_TIME = 3600000; // 1h em ms
 
     public String generateToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
@@ -40,5 +40,9 @@ public class JwtUtil {
         } catch (JwtException | IllegalArgumentException e) {
             return false;
         }
+    }
+
+    public long getExpirationTimeInSeconds() {
+        return EXPIRATION_TIME / 1000;
     }
 }

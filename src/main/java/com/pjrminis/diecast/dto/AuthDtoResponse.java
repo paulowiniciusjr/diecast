@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthDtoResponse {
     private String token;
+    private Long expiresIn;
 }

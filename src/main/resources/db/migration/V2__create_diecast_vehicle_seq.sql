@@ -1,0 +1,5 @@
+CREATE SEQUENCE diecast_vehicle_seq
+	MINVALUE 0
+	NO MAXVALUE
+	START 0
+	NO CYCLE;

@@ -36,7 +36,8 @@ dependencies {
 
     // PostgreSQL and Google Cloud SQL
     implementation 'org.postgresql:postgresql:42.7.7'
-    implementation 'com.google.cloud.sql:postgres-socket-factory:1.25.2'
+    //exclusivo para o GCP
+    //implementation 'com.google.cloud.sql:postgres-socket-factory:1.25.2'
 
     //Spring Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -65,6 +66,13 @@ dependencies {
 
     implementation 'org.springframework.ai:spring-ai-azure-openai-spring-boot-starter:1.0.0-M6'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    // Source: https://mvnrepository.com/artifact/org.flywaydb/flyway-gradle-plugin
+    runtimeOnly 'org.flywaydb:flyway-gradle-plugin:11.20.2'
+    implementation 'org.flywaydb:flyway-core:10.15.0'
+    implementation 'org.flywaydb:flyway-database-postgresql:10.15.0'
+
+
 
 }
 
