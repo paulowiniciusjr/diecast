@@ -5,7 +5,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm'
 }
 
-group = 'com.pjrminis'
+group = 'com.diecast'
 version = '0.0.1-SNAPSHOT'
 description = 'Catalog for diecast miniatures'
 
