@@ -42,9 +42,11 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers("/auth/me").authenticated()
+                        .requestMatchers("/api/**").authenticated()
                         .requestMatchers("/actuator/health").permitAll()
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/api/**").authenticated()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 );
 

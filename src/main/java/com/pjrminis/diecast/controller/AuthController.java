@@ -3,10 +3,12 @@ package com.pjrminis.diecast.controller;
 import com.pjrminis.diecast.config.JwtUtil;
 import com.pjrminis.diecast.dto.AuthDto;
 import com.pjrminis.diecast.dto.AuthDtoResponse;
+import com.pjrminis.diecast.dto.AuthMeResponse;
 import com.pjrminis.diecast.model.User;
 import com.pjrminis.diecast.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -47,13 +49,21 @@ public class AuthController {
     }
 
 
-/*    public AuthDtoResponse login(@RequestBody AuthDto authDto) {
-        // Aqui você pode validar o usuário (ex.: consultar no banco)@Autowired
-        AuthDtoResponse response = new AuthDtoResponse();
-        response.setToken(jwtUtil.generateToken(authDto.getUsername()));
-        response.setExpiresIn(jwtUtil.getExpirationTimeInSeconds());
-        return response;
-    }*/
+    @GetMapping("/me")
+    public ResponseEntity<AuthMeResponse> me(Authentication authentication) {
+
+        String username = authentication.getName();
+
+        String role = authentication.getAuthorities()
+                .stream()
+                .findFirst()
+                .map(a -> a.getAuthority().replace("ROLE_", ""))
+                .orElse("USER");
+
+        return ResponseEntity.ok(
+                new AuthMeResponse(username, role)
+        );
+    }
 
 
 }
