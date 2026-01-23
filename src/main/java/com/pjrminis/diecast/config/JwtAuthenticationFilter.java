@@ -13,6 +13,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Filtro de autenticação JWT que intercepta as requisições HTTP para validar o token JWT.
@@ -34,7 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain chain)
             throws ServletException, IOException {
 
-        // 🔥 ESSENCIAL PARA CORS
+        // ESSENCIAL PARA CORS
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
             chain.doFilter(request, response);
@@ -47,29 +48,27 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = authHeader.substring(7);
 
             if (jwtUtil.validateToken(token)) {
+
                 String username = jwtUtil.extractUsername(token);
+                String role = jwtUtil.extractRole(token);
 
                 var auth = new UsernamePasswordAuthenticationToken(
                         username,
                         null,
-                        Collections.singletonList(
-                                new SimpleGrantedAuthority("ROLE_USER")
-                        )
+                        List.of(new SimpleGrantedAuthority("ROLE_" + role))
                 );
 
-                auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                if (jwtUtil.validateToken(token)) {
-                    SecurityContextHolder.getContext().setAuthentication(auth);
-                } else {
-                    SecurityContextHolder.clearContext();
-                }
+                auth.setDetails(
+                        new WebAuthenticationDetailsSource().buildDetails(request)
+                );
 
-
+                SecurityContextHolder.getContext().setAuthentication(auth);
             }
         }
 
         chain.doFilter(request, response);
     }
+
 
 }
