@@ -1,7 +1,10 @@
 package com.pjrminis.diecast.service;
 
 import com.pjrminis.diecast.model.DiecastVehicle;
+import com.pjrminis.diecast.model.User;
 import com.pjrminis.diecast.repository.DiecastVehicleRepository;
+import com.pjrminis.diecast.repository.UserRepository;
+import com.pjrminis.diecast.security.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +17,21 @@ public class DiecastVehicleService {
     @Autowired
     private DiecastVehicleRepository repository;
 
-    public void createVehicle(DiecastVehicle vehicle) {
+    @Autowired
+    private UserRepository userRepository;
+
+    public DiecastVehicle createVehicle(DiecastVehicle vehicle) {
+
         repository.save(vehicle);
+
+        String username = SecurityUtils.getUsername();
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        vehicle.setUser(user);
+
+        return repository.save(vehicle);
     }
 
     public void deleteVehicle(Long id) {
@@ -42,5 +58,11 @@ public class DiecastVehicleService {
     public List<DiecastVehicle> getAll() {
         return repository.findAll();
     }
+
+    public List<DiecastVehicle> listMyVehicles() {
+        String username = SecurityUtils.getUsername();
+        return repository.findByUserUsername(username);
+    }
+
 
 }

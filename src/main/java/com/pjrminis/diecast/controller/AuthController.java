@@ -1,11 +1,10 @@
 package com.pjrminis.diecast.controller;
 
 import com.pjrminis.diecast.config.JwtUtil;
-import com.pjrminis.diecast.dto.AuthDto;
-import com.pjrminis.diecast.dto.AuthDtoResponse;
-import com.pjrminis.diecast.dto.AuthMeResponse;
+import com.pjrminis.diecast.dto.*;
 import com.pjrminis.diecast.model.User;
 import com.pjrminis.diecast.repository.UserRepository;
+import com.pjrminis.diecast.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -20,11 +19,13 @@ public class AuthController {
     private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
-    public AuthController(JwtUtil jwtUtil, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AuthController(JwtUtil jwtUtil, UserRepository userRepository, PasswordEncoder passwordEncoder, UserService userService) {
         this.jwtUtil = jwtUtil;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
     }
 
     @PostMapping("/login")
@@ -64,6 +65,24 @@ public class AuthController {
                 new AuthMeResponse(username, role)
         );
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<RegisterResponse> register(
+            @RequestBody RegisterRequest request) {
+
+        User user = userService.register(
+                request.getUsername(),
+                request.getPassword()
+        );
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new RegisterResponse(
+                        user.getId(),
+                        user.getUsername(),
+                        user.getRole().name()
+                ));
+    }
+
 
 
 }

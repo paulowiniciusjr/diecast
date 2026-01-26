@@ -54,5 +54,12 @@ public class DiecastVehicleController {
         return ResponseEntity.ok(vehicle);
     }
 
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @GetMapping("/me")
+    public ResponseEntity<List<DiecastVehicle>> getMyVehicles() {
+        List<DiecastVehicle> vehicles = service.listMyVehicles();
+        return ResponseEntity.ok(vehicles);
+    }
+
 
 }

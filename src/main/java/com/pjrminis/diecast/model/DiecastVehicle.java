@@ -1,5 +1,6 @@
 package com.pjrminis.diecast.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -35,4 +36,10 @@ public class DiecastVehicle implements Serializable {
     @Column(name = "vehicle_diecast_brand")
     private String vehicleDiecastBrand;
     private String color;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
+    private User user;
+
 }
