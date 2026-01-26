@@ -18,7 +18,7 @@ public class DiecastVehicleController {
     @Autowired
     private DiecastVehicleService service;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<DiecastVehicle> createVehicle(@RequestBody DiecastVehicle vehicle) {
         service.createVehicle(vehicle);
@@ -33,21 +33,21 @@ public class DiecastVehicleController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteVehicle(@PathVariable Long id) {
         service.deleteVehicle(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ResponseEntity<List<DiecastVehicle>> getAllVehicles() {
         List<DiecastVehicle> vehicles = service.getAll();
         return ResponseEntity.ok(vehicles);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<DiecastVehicle> updateVehicle(@PathVariable Long id, @RequestBody DiecastVehicle updatedVehicle) {
         DiecastVehicle vehicle = service.updateVehicle(id, updatedVehicle);

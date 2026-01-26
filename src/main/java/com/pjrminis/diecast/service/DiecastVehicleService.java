@@ -22,8 +22,6 @@ public class DiecastVehicleService {
 
     public DiecastVehicle createVehicle(DiecastVehicle vehicle) {
 
-        repository.save(vehicle);
-
         String username = SecurityUtils.getUsername();
 
         User user = userRepository.findByUsername(username)
