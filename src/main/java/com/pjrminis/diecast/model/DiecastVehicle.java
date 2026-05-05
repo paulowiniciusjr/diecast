@@ -8,17 +8,17 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "diecast_vehicle")
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(of = "id")
+@Getter
+@Setter
 @SequenceGenerator(
         name = "diecast_vehicle_seq",
         sequenceName = "diecast_vehicle_seq",
         allocationSize = 1,
         initialValue = 1
 )
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode(of = "id")
-@Getter
-@Setter
 
 public class DiecastVehicle implements Serializable {
 
