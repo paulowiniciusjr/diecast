@@ -6,12 +6,6 @@ import lombok.*;
 
 import java.io.Serializable;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode(of = "id")
-
 @Entity
 @Table(name = "diecast_vehicle")
 @SequenceGenerator(
@@ -20,6 +14,11 @@ import java.io.Serializable;
         allocationSize = 1,
         initialValue = 1
 )
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(of = "id")
+@Getter
+@Setter
 
 public class DiecastVehicle implements Serializable {
 
