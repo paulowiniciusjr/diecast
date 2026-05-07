@@ -59,7 +59,7 @@ public class SecurityConfig {
         System.out.println(">>> CORS CONFIG LOADED <<<");
 
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:4200", "https://diecast-front-production.up.railway.app"));
+        config.setAllowedOrigins(List.of("http://localhost:4200", "https://diecast-front-production.up.railway.app", "https://diecast-front.onrender.com"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
