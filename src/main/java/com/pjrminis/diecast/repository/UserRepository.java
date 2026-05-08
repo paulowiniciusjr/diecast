@@ -11,8 +11,10 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
 
+    Optional<User> findByEmail(String email);
+
     @Query("SELECT new com.pjrminis.diecast.dto.UserWithVehiclesDto(u.id, u.username, " +
-           "CAST(COUNT(v) AS LONG), CAST(u.createdAt AS STRING)) " +
-           "FROM User u LEFT JOIN u.vehicles v GROUP BY u.id, u.username, u.createdAt ORDER BY u.id")
+           "u.email, u.phone, CAST(u.role AS STRING), CAST(COUNT(v) AS LONG), CAST(u.createdAt AS STRING)) " +
+           "FROM User u LEFT JOIN u.vehicles v GROUP BY u.id, u.username, u.email, u.phone, u.role, u.createdAt ORDER BY u.id")
     List<UserWithVehiclesDto> findAllUsersWithVehicleCounts();
 }

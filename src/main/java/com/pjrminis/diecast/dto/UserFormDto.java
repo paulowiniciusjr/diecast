@@ -7,12 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserWithVehiclesDto {
-    private Long id;
+public class UserFormDto {
     private String username;
     private String email;
     private String phone;
+    private String password;
     private String role;
-    private Long vehicleCount;
-    private String registeredAt;
 }

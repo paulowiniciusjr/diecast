@@ -33,6 +33,11 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
+    @Column(unique = true)
+    private String email;
+
+    private String phone;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<DiecastVehicle> vehicles = new ArrayList<>();
